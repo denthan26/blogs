@@ -1,7 +1,9 @@
-[gd_scene load_steps=45 format=3 uid="uid://copf8rse8cges"]
+[gd_scene load_steps=47 format=3 uid="uid://copf8rse8cges"]
 
 [ext_resource type="Texture2D" uid="uid://bdo40bmkbfq5m" path="res://assets/game/characters/basic_charakter_spritesheet.png" id="1_7uws0"]
 [ext_resource type="Texture2D" uid="uid://dutgipxqwd7ys" path="res://assets/game/characters/basic_charakter_actions.png" id="2_t61fv"]
+[ext_resource type="Script" uid="uid://dlcyfdovlq101" path="res://script/state_machine/node_state_machine.gd" id="3_hss88"]
+[ext_resource type="Script" uid="uid://uttrym2eq0ni" path="res://scenes/characters/player/idle_state.gd" id="4_qd3e3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kqyw"]
 atlas = ExtResource("2_t61fv")
@@ -250,7 +252,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_xuses")
 }],
 "loop": true,
-"name": &"ldle_right",
+"name": &"idle_right",
 "speed": 3.0
 }, {
 "frames": [{
@@ -394,10 +396,18 @@ radius = 8.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_bcx1r")
-animation = &"idle_front"
+animation = &"idle_right"
 autoplay = "idle_front"
-frame_progress = 0.592316
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_t61fv")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("3_hss88")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animated_sprite_2d")]
+script = ExtResource("4_qd3e3")
+player = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")

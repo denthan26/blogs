@@ -1,7 +1,4 @@
-res://readme/tilemap.md
-res://scenes/test/test_scene_tile_map.tscn
-res://Tilesets/game_tile_set.tres
-res://scenes/test/test_scene_default.tscn
-res://readme/player.md
 res://scenes/characters/player/player.tscn
+res://Tilesets/game_tile_set.tres
+res://scenes/characters/player/idle_state.gd
 res://scenes/test/test_scene_player.tscn
